@@ -48,3 +48,8 @@
         :else (println "O valor foi encontrado!" (get res :no) (str "Quantidade de passos " (get res :passos)))))
 
 (defn gestaoBuscar [raiz] (apresentaBuscar (busca raiz (ler) 0)))
+
+(defn inserirMany [raiz n] (if (empty? n) raiz (inserirMany (insere (first n) raiz) (rest n))))
+
+(defn gestaoRandom [raiz] (inserirMany raiz (map #(criaNo %) (take (ler) (repeatedly #(rand-int 1000))))))
+

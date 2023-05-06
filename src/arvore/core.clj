@@ -9,6 +9,7 @@
 	(println "3 - Imprimir em In-Ordem")
 	(println "4 - Imprimir em Pos-Ordem")
 	(println "5 - Buscar um valor" )
+	(println "6 - Inserir valores aleatorios")
 	(println "0 - Sair")
 	(print "Digite uma opcao: ")
 	(flush)
@@ -21,9 +22,10 @@
 		(= op 3) (do (inOrdem raiz) (escolhe raiz (menu)))
 		(= op 4) (do (posOrdem raiz) (escolhe raiz (menu)))
 		(= op 5) (do (gestaoBuscar raiz) (escolhe raiz (menu)))
+		(= op 6) (escolhe (gestaoRandom raiz) (menu))
 		(= op 0) (do (println "Saindo...") raiz)
 		:else (do (println "Opcao invalida!") (escolhe raiz (menu)))))
 
 ; Sem usar loop
-(defn -main [] (println (escolhe nil (menu))))
+(defn -main [] (escolhe nil (menu)))
 
