@@ -1,8 +1,9 @@
 (ns arvore.core
 	(:gen-class)
 	(:require 
-		[arvore.arvore :refer :all]
-		[arvore.math :refer :all]))
+		[arvore.arvore :refer :all] 
+		[arvore.math :refer :all] 
+		[arvore.remocao :refer :all]))
 
 (defn menu []
 	(println)
@@ -19,6 +20,7 @@
 	(println "11 - Média dos valores na arvore")
 	(println "12 - Maior valor presente na arvore")
 	(println "13 - Menor valor presente na arvore")
+	(println "14 - Remover um valor da arvore")
 	(println "0 - Sair")
 	(print "Digite uma opcao: ")
 	(flush)
@@ -27,9 +29,9 @@
 (defn escolhe [raiz op] 
 	(cond
 		(= op 1)  (escolhe (gestaoLer raiz) (menu))
-		(= op 2)  (do (preOrdem raiz) (escolhe raiz (menu)))
-		(= op 3)  (do (inOrdem raiz) (escolhe raiz (menu)))
-		(= op 4)  (do (posOrdem raiz) (escolhe raiz (menu)))
+		(= op 2)  (do (gestaoShow raiz 1) (escolhe raiz (menu)))
+		(= op 3)  (do (gestaoShow raiz 2) (escolhe raiz (menu)))
+		(= op 4)  (do (gestaoShow raiz 3) (escolhe raiz (menu)))
 		(= op 5)  (do (gestaoBuscar raiz) (escolhe raiz (menu)))
 		(= op 6)  (escolhe (gestaoRandom raiz) (menu))
 		(= op 7)  (do (println (soma raiz)) (escolhe raiz (menu)))
@@ -39,9 +41,10 @@
 		(= op 11) (do (println (double (media raiz))) (escolhe raiz (menu)))
 		(= op 12) (do (println (maior raiz)) (escolhe raiz (menu)))
 		(= op 13) (do (println (menor raiz)) (escolhe raiz (menu)))
+		(= op 14) (escolhe (gestaoRemove raiz) (menu))
 		(= op 0)  (do (println "Saindo...") raiz)
 		:else     (do (println "Opcao invalida!") (escolhe raiz (menu)))))
 
 ; Sem usar loop
-(defn -main [] (escolhe nil (menu)))
+(defn -main [] (do (println "ARVORE") (escolhe nil (menu))))
 

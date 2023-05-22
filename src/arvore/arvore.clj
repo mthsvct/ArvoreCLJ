@@ -2,7 +2,7 @@
 
 (defn pega [m] (get m :valor))
 
-(defn ler [] (do (print "Digite um numero: ") (flush) (Integer/parseInt (read-line))))
+(defn ler [] (do (print "\nDigite um numero: ") (flush) (Integer/parseInt (read-line))))
 
 (defn criaNo [valor] {:valor valor :esquerda nil :direita nil})
 
@@ -23,17 +23,32 @@
 
 (defn inOrdem [raiz]
     (if (false? (nil? raiz)) 
-        (do 
-            (inOrdem (get raiz :esquerda))
+        (do (inOrdem (get raiz :esquerda))
             (println (pega raiz)) 
             (inOrdem (get raiz :direita)))))
 
 (defn posOrdem [raiz]
     (if (false? (nil? raiz)) 
-        (do 
-            (posOrdem (get raiz :esquerda)) 
+        (do (posOrdem (get raiz :esquerda)) 
             (posOrdem (get raiz :direita))
             (println (pega raiz)))))
+
+(defn conta [raiz] 
+    (if (nil? raiz) 
+        0 
+        (+ 1 
+            (conta (get raiz :esquerda))
+            (conta (get raiz :direita)))))
+
+(defn vazia? [raiz] (= (conta raiz) 0))
+
+(defn gestaoShow [raiz op]
+    (if (vazia? raiz) 
+        (println "A arvore esta vazia")
+        (cond
+            (= op 1) (preOrdem raiz)
+            (= op 2) (inOrdem raiz)
+            (= op 3) (posOrdem raiz))))
 
 (defn busca [raiz valor passos]
     (cond
@@ -52,4 +67,3 @@
 (defn inserirMany [raiz n] (if (empty? n) raiz (inserirMany (insere (first n) raiz) (rest n))))
 
 (defn gestaoRandom [raiz] (inserirMany raiz (map #(criaNo %) (take (ler) (repeatedly #(rand-int 1000))))))
-
