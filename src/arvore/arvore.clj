@@ -14,29 +14,47 @@
 
 (defn gestaoLer [raiz] (insere (criaNo (ler)) raiz))
 
+(defn nilInt? [filho] (if (nil? filho) 0 1))
+
+(defn qntFilhos [raiz] (+ (nilInt? (get raiz :esquerda)) (nilInt? (get raiz :direita))))
+
+(defn folha? [raiz] (= (qntFilhos raiz) 0))
+
+(defn show [raiz] (println (pega raiz) "-" (qntFilhos raiz) "filhos") )
+
 (defn preOrdem [raiz] 
+    "Imprime a arvore em pre-ordem"
     (if (false? (nil? raiz)) 
-        (do 
-            (println (pega raiz)) 
+        (do (show raiz)
             (preOrdem (get raiz :esquerda)) 
             (preOrdem (get raiz :direita)))))
 
 (defn inOrdem [raiz]
+    "Imprime a arvore em ordem"
     (if (false? (nil? raiz)) 
         (do (inOrdem (get raiz :esquerda))
-            (println (pega raiz)) 
+            (show raiz)
             (inOrdem (get raiz :direita)))))
 
 (defn posOrdem [raiz]
+    "Imprime a arvore em pos-ordem"
     (if (false? (nil? raiz)) 
         (do (posOrdem (get raiz :esquerda)) 
             (posOrdem (get raiz :direita))
-            (println (pega raiz)))))
+            (show raiz))))
+    
+(defn inOrdemReverse [raiz]
+    "Imprime a arvore em ordem reversa"
+    (if (false? (nil? raiz)) 
+        (do (inOrdemReverse (get raiz :direita))
+            (println (pega raiz)) 
+            (inOrdemReverse (get raiz :esquerda)))))
 
 (defn conta [raiz] 
+    "Conta a quantidade de nos da arvore"
     (if (nil? raiz) 
         0 
-        (+ 1 
+        (+  1 
             (conta (get raiz :esquerda))
             (conta (get raiz :direita)))))
 
@@ -48,7 +66,8 @@
         (cond
             (= op 1) (preOrdem raiz)
             (= op 2) (inOrdem raiz)
-            (= op 3) (posOrdem raiz))))
+            (= op 3) (posOrdem raiz)
+            (= op 4) (inOrdemReverse raiz))))
 
 (defn busca [raiz valor passos]
     (cond
