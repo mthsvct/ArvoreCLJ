@@ -22,6 +22,8 @@
 	(println "13 - Maior valor presente na arvore")
 	(println "14 - Menor valor presente na arvore")
 	(println "15 - Remover um valor da arvore")
+	(println "16 - Altura da arvore")
+	(println "17 - Profundidade de um nó")
 	(println "0 - Sair")
 	(print "Digite uma opcao: ")
 	(flush)
@@ -44,6 +46,8 @@
 		(= op 13) (do (println (maior raiz)) (escolhe raiz (menu)))
 		(= op 14) (do (println (menor raiz)) (escolhe raiz (menu)))
 		(= op 15) (escolhe (gestaoRemove raiz) (menu))
+		(= op 16) (do (println (altura raiz)) (escolhe raiz (menu)))
+		(= op 17) (do (gestaoProfundidade raiz) (escolhe raiz (menu)))
 		(= op 0)  (do (println "Saindo...") raiz)
 		:else     (do (println "Opcao invalida!") (escolhe raiz (menu)))))
 

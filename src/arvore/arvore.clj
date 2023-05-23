@@ -20,7 +20,7 @@
 
 (defn folha? [raiz] (= (qntFilhos raiz) 0))
 
-(defn show [raiz] (println (pega raiz) "-" (qntFilhos raiz) "filhos") )
+(defn show [raiz] "Apresenta infos do nó" (println (pega raiz) "-" (qntFilhos raiz) "filhos") )
 
 (defn preOrdem [raiz] 
     "Imprime a arvore em pre-ordem"
@@ -86,3 +86,20 @@
 (defn inserirMany [raiz n] (if (empty? n) raiz (inserirMany (insere (first n) raiz) (rest n))))
 
 (defn gestaoRandom [raiz] (inserirMany raiz (map #(criaNo %) (take (ler) (repeatedly #(rand-int 1000))))))
+
+(defn altura [raiz] (if (nil? raiz) 0 (inc (max (altura (get raiz :esquerda)) (altura (get raiz :direita))))))
+
+(defn profundidade [raiz valor cont]
+    "Função que retorna a profundidade de um nó"
+    (cond
+        (nil? raiz) -1
+        (= valor (pega raiz)) cont
+        (> valor (pega raiz)) (profundidade (get raiz :direita) valor (inc cont))
+        :else (profundidade (get raiz :esquerda) valor (inc cont))))
+
+(defn gestaoProfundidade [raiz] 
+    (let 
+        [p (profundidade raiz (ler) 0)]
+        (if (= p -1) 
+            (println "Nao foi possivel calcular profundidade deste no pois o valor lido nao encontrado.")
+            (println "Profunidade = " p))))

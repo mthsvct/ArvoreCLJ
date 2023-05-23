@@ -16,10 +16,7 @@
                         maior (pegaMaior (get raiz :esquerda))
                         aux (pega maior)
                         subArv (remover raiz aux)]
-                    (do
-                    ;(print "maior =" maior "\naux = " aux "\nsubArv =" subArv "\nraiz =" raiz)
-                    {:valor aux, :esquerda (get subArv :esquerda), :direita (get subArv :direita)})
-                ))) ; Se tiver 2 filhos, siga para a função removePai2
+                    {:valor aux, :esquerda (get subArv :esquerda), :direita (get subArv :direita)}))) ; Se tiver 2 filhos, siga para a função removePai2
         (< valor (pega raiz)) (assoc raiz :esquerda (remover (get raiz :esquerda) valor))
         (> valor (pega raiz)) (assoc raiz :direita (remover (get raiz :direita) valor))))
 
